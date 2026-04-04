@@ -12,4 +12,4 @@ class UserAdmin(admin.ModelAdmin):
     search_fields = ('username')
 
 
-admin.site.register([Department, User, Position, Employee])
+admin.site.register([Department, User, Position, Employee, StoreItem])

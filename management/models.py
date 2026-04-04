@@ -21,7 +21,7 @@ class User(AbstractUser):
     profile_pic = models.ImageField(blank=True, default='blank_passport.webp')
     position = models.CharField(choices=positions, max_length=50, default='Others')
     ID_number = models.CharField(unique=True, max_length=12)
-    phone_no = models.CharField(max_length=13)
+    phone_no = models.CharField(max_length=13, unique=True)
     date_registered = models.DateTimeField(default=datetime.now)
 
     def __str__(self):
@@ -29,7 +29,7 @@ class User(AbstractUser):
     
 class Department(models.Model):
     department_name = models.CharField(max_length=50)
-    HOD = models.OneToOneField(User, on_delete=models.CASCADE, to_field='username')
+    HOD = models.ForeignKey(User, on_delete=models.CASCADE, to_field='username', related_name='departments_incharge', limit_choices_to=Q(position='HOD') | Q(position__contains='MANAGER'))
     job = models.CharField(max_length=255)
 
     def __str__(self):
@@ -40,12 +40,13 @@ class Position(models.Model):
     payment_basis_options = {
         'DAILY': 'Daily',
         'WEEKLY' : 'Weekly',
-        'MONTHLY': 'Monthly'
+        'MONTHLY': 'Monthly',
+        'PER WORK': 'Per Work',
     }
     
-    department = models.ForeignKey(Department, on_delete=models.CASCADE)
-    foreman = models.ForeignKey(User, on_delete=models.CASCADE, related_name='foreman', limit_choices_to=Q(position='FOREMAN') | Q(position= 'HOD'))
-    assistant_foreman = models.ForeignKey(User, on_delete=models.CASCADE, related_name='assistant_foreman', default=None, null=True, blank=True)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='jobs')
+    foreman = models.ForeignKey(User, on_delete=models.CASCADE, related_name='positions_incharge', limit_choices_to=Q(position='FOREMAN') | Q(position= 'HOD'))
+    assistant_foreman = models.ForeignKey(User, on_delete=models.CASCADE, related_name='assistant_in', default=None, null=True, blank=True)
     job_title = models.CharField(max_length=50)
     payment_basis = models.CharField(choices=payment_basis_options, max_length=10)
     payment_amount = models.DecimalField(max_digits=10, decimal_places=2)
@@ -58,8 +59,25 @@ class Employee(models.Model):
     last_name = models.CharField(max_length=50)
     phone_number = models.CharField(max_length=13)
     passport = models.ImageField(default='blank_passport.webp', blank=True)
-    position =models.ForeignKey(Position, on_delete=models.CASCADE)
+    position =models.ForeignKey(Position, on_delete=models.CASCADE, related_name='employees')
     date_employed = models.DateTimeField(default=datetime.now)
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
+
+class StoreItem(models.Model):
+    item = models.CharField(max_length=50, unique=True)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='items', blank=True, null=True)
+    quantity = models.PositiveIntegerField(default=0)
+
+    @property
+    def in_store(self):
+        if self.quantity == 0:
+            return 'NO'
+        else:
+            return f'{self.quantity} remaining'
+
+    def __str__(self):
+        return self.item
+        
+

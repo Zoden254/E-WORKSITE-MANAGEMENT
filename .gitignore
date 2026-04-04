@@ -1,7 +1,16 @@
+
 __pycache__/
-
 db.sqlite3
+*.pyc
 
-.env
 
 venv/
+.env
+
+tailwind.config.js
+.django_tailwind_cli
+tailwindcss.exe
+
+.coverage
+
+htmlcov/
