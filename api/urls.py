@@ -1,0 +1,10 @@
+from django.urls import path
+from . import views
+
+app_name = 'api'
+
+urlpatterns = [
+    path('users/', views.UsersList.as_view(), name="users-api"),
+    path('departments/', views.DepartmentList.as_view(), name='deps-api'),
+    path('positions/', views.PositionsList.as_view())
+]
