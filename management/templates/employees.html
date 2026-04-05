@@ -1,6 +1,6 @@
 
-
-<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); ">
+<h1>Employees</h1>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); ">
 
         {% for employee in employees %}
         <div>
@@ -11,4 +11,11 @@
         </div>
         {% endfor %}
     
-</div>
+    </div>
+
+    <a href="{% url "management:register_employee" %}" style="display: flex;">
+        <div>
+            +
+        </div>
+        New Employee
+    </a>

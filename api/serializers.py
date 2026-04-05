@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from management.models import *
+from activity_log.models import  *
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -22,3 +23,6 @@ class PositionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Position
         fields = ['job_title', 'foreman', 'payment_basis', 'payment_amount']
+
+class ActivityLogSerializer(serializers.ModelSerializer):
+    pass
