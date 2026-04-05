@@ -1,0 +1,14 @@
+
+
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); ">
+
+        {% for employee in employees %}
+        <div>
+        <!--<img src="{{employee.passport.url}}">  -->
+        <p>Full Names: {{employee.first_name}} {{ employee.last_name }}</p>
+        <p>Phone Number: {{employee.phone_number}}</p>
+        <p>Position: {{employee.position}}</p>
+        </div>
+        {% endfor %}
+    
+</div>

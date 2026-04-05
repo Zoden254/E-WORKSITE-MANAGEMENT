@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'api',
     'activity_log',
+    'widget_tweaks',
 
 ]
 
