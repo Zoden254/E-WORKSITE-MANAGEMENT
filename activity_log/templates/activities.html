@@ -1,5 +1,5 @@
 {% extends "master.html" %}
-
+{% load humanize %}
 {% block title %}Activiy Log{% endblock title %}
 
 {% block content %}
@@ -28,11 +28,11 @@
             <td>{{employee.employee}}</td>
             <td>{{ employee.employee.position }}</td>
             <td>{{ employee.employee.position.payment_basis }}</td>
-            <td>{{ employee.employee.position.payment_amount }}</td>
+            <td>{{ employee.employee.position.payment_amount|intcomma }}</td>
             <td>
                 <form method="POST" action="{% url "activity_log:update_hotel_bill" employee.id %}">
                     {% csrf_token %}
-                    <input type="text" value="{{employee.hotel_bill}}" name="hotel_bill">
+                    <input type="text" value="{{employee.hotel_bill|intcomma}}" name="hotel_bill">
                     <button type="submit">Update</button>
                 </form>
             </td>
@@ -55,6 +55,7 @@
     <form method="POST">
         {% csrf_token %}
         {{form}}
+        <button type="submit">Add</button>
     </form>
 
 </div>
