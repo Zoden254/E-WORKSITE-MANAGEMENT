@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from .forms import *
+from django.db.models import Count
 from activity_log.models import *
 from .models import *
 
@@ -24,22 +25,6 @@ def register_employee(request):
         return render(request, 'register_employee.html', {'form': form})
     
 
-def activities(request):
-    return render(request, 'activities.html')
-
-def activitybasis(request, basis):
-    if basis == 'daily':
-        form = DailyActivityLogForm
-        activitylog = DailyEmployeesActivityLog.objects.all()
-
-        return render(request, 'activitybasis.html', {'activity_log': activitylog, 'form': form})
-    elif basis == 'weekly':
-        activitylog = WeeklyEmployeesActivityLog.objects.all()
-
-        return render(request, 'activitybasis.html', {'activity_log': activitylog})
-    elif basis == 'monthly':
-        activitylog = MonthlyEmployeesActivityLog.objects.all()
-
-        return render(request, 'activitybasis.html', {'activity_log': activitylog})
-    else:
-        return redirect('management:activities')
+def today_activities(request):
+    form = DailyActivityLogForm
+    return render(request, 'activities.html', {'form': form})

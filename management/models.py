@@ -5,7 +5,7 @@ from django.db.models import Q
 # Create your models here.
 
 class User(AbstractUser):
-    #Limited to those who can use the system.
+    #Limited to those who can operate the system.
     positions = {
         'OVERALL MANAGER': 'Overall Manager',
         'SITE MANAGER' : 'Site Manager',
@@ -41,7 +41,7 @@ class Position(models.Model):
         'DAILY': 'Daily',
         'WEEKLY' : 'Weekly',
         'MONTHLY': 'Monthly',
-        'PER WORK': 'Per Work',
+        'MANUAL': 'Manual',
     }
     
     department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='jobs')

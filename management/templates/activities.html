@@ -1,16 +1,10 @@
 
-<a href="{% url "management:activitybasis" 'daily' %}">
-    Daily Workers
-</a>
 
 
-<br>
+<div>
+    <form method="POST">
+        {% csrf_token %}
+        {{form}}
+    </form>
 
-<a href="{% url "management:activitybasis" 'weekly' %}">
-    Weekly Workers
-</a>
-
-<br>
-<a href="{% url "management:activitybasis" 'monthly' %}">
-    Monthly Workers
-</a>
+</div>

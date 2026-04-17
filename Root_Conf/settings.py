@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'api',
     'activity_log',
     'widget_tweaks',
+    'django.contrib.postgres',
 
 ]
 

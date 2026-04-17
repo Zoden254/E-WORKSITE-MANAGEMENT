@@ -9,6 +9,6 @@ class RegisterEmployeeForm(ModelForm):
 
 class DailyActivityLogForm(ModelForm):
     class Meta:
-        model = DailyEmployeesActivityLog
+        model = DailyActivitie
         fields = '__all__'
 

@@ -1,4 +1,8 @@
+{% extends "master.html" %}
 
+{% block title %}Employees{% endblock title %}
+
+{% block content %}
 <h1>Employees</h1>
     <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); ">
 
@@ -19,3 +23,5 @@
         </div>
         New Employee
     </a>
+
+{% endblock content %}
