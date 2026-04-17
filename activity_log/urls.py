@@ -5,5 +5,8 @@ app_name = "activity_log"
 
 
 urlpatterns = [
-    path('today-activities', views.today_activities, name='today_activities')
+    path('departments/', views.DepartmentsList.as_view(), name="departments"),
+    path('<str:department_name>/today-activities/', views.today_activities, name='today_activities'),
+    path('update-hotel-bill/<int:id>/', views.update_hotel_bill, name='update_hotel_bill'),
+    path('update-obligation/<int:id>/', views.update_obligation, name='update_obligation'),
 ]

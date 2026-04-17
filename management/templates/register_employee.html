@@ -1,4 +1,9 @@
+{% extends "master.html" %}
 {% load widget_tweaks %}
+
+{% block title %}New Employee{% endblock title %}
+
+{% block content %}
 
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
@@ -13,3 +18,5 @@
     <button type="submit">Register</button>
     
 </form>
+
+{% endblock content %}

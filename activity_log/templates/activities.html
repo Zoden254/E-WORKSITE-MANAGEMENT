@@ -1,0 +1,62 @@
+{% extends "master.html" %}
+
+{% block title %}Activiy Log{% endblock title %}
+
+{% block content %}
+<h1>{% now "DATE_FORMAT" %}</h1>
+
+{% if messages %}
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+{% endif %}
+
+<div>
+    <table>
+        <tr>
+            <th>Employee</th>
+            <th>Job title</th>
+            <th>Payment basis</th>
+            <th>Salary</th>
+            <th>Hotel Bill</th>
+            <th>Obligations</th>
+            <th>balance</th>
+
+        </tr>
+        {% for employee in activities %}
+        <tr>
+            <td>{{employee.employee}}</td>
+            <td>{{ employee.employee.position }}</td>
+            <td>{{ employee.employee.position.payment_basis }}</td>
+            <td>{{ employee.employee.position.payment_amount }}</td>
+            <td>
+                <form method="POST" action="{% url "activity_log:update_hotel_bill" employee.id %}">
+                    {% csrf_token %}
+                    <input type="text" value="{{employee.hotel_bill}}" name="hotel_bill">
+                    <button type="submit">Update</button>
+                </form>
+            </td>
+            <td>
+                <form method="POST" action="{% url "activity_log:update_obligation" employee.id %}">
+                    {% csrf_token %}
+                    <textarea type="text" name="obligation">{{employee.obligation}}</textarea>
+                    <button type="submit" >Update</button>
+                </form>
+            </td>
+            <td>{{ employee.balance }}</td>
+        </tr>
+
+        {% endfor %}
+    </table>
+</div>
+
+<div>
+    <h2>Add Employee</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{form}}
+    </form>
+
+</div>
+
+{% endblock content %}

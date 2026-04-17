@@ -1,0 +1,11 @@
+{% extends "master.html" %}
+
+{% block title %}Departments{% endblock title %}
+
+{% block content %}
+
+    {% for department in departments %}
+    <a href="{% url "activity_log:today_activities" department %}">{{department}}</a>
+    {% endfor %}
+
+{% endblock content %}
