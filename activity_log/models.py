@@ -5,7 +5,6 @@ from django.utils import timezone
 
 # Create your models here.
 
-
 class DailyActivitie(models.Model):
     day = models.DateField(default=timezone.now)
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE, unique_for_date="day")

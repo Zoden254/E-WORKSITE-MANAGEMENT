@@ -24,7 +24,3 @@ def register_employee(request):
         form = RegisterEmployeeForm
         return render(request, 'register_employee.html', {'form': form})
     
-
-def today_activities(request):
-    form = DailyActivityLogForm
-    return render(request, 'activities.html', {'form': form})

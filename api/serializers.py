@@ -24,5 +24,15 @@ class PositionSerializer(serializers.ModelSerializer):
         model = Position
         fields = ['job_title', 'foreman', 'payment_basis', 'payment_amount']
 
-class ActivityLogSerializer(serializers.ModelSerializer):
-    pass
+class EmployeeSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Employee
+        fields = '__all__'
+        
+
+class DailyActivitiesSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = DailyActivitie
+        fields = ['day', 'employee']
