@@ -32,7 +32,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
         
 
 class DailyActivitiesSerializer(serializers.ModelSerializer):
-    
+    employee = EmployeeSerializer(read_only=True)
     class Meta:
         model = DailyActivitie
-        fields = ['day', 'employee']
+        fields = '__all__'

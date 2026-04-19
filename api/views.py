@@ -24,3 +24,11 @@ class EmployeesList(generics.ListCreateAPIView):
 class EmployeeDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
+
+class DailyActivitiesList(generics.ListCreateAPIView):
+    queryset = DailyActivitie.objects.all()
+    serializer_class = DailyActivitiesSerializer
+
+class ActivityDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = DailyActivitie.objects.all()
+    serializer_class = DailyActivitiesSerializer
