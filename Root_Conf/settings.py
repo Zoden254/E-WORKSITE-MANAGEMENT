@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'activity_log',
     'widget_tweaks',
     'django.contrib.postgres',
+    'django_tailwind_cli',
 
 ]
 
@@ -130,3 +131,9 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'mystaticfiles')]
 MEDIA_URL = 'images/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'mystaticfiles/images/')
+
+TAILWIND_CLI_SRC_CSS = "static/src/tailwind.css"
+
+TAILWIND_CLI_DIST_CSS = "css/tailwind.css"
+
+TAILWIND_CLI_PATH = BASE_DIR / "tailwindcss.exe"

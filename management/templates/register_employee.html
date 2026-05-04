@@ -4,19 +4,22 @@
 {% block title %}New Employee{% endblock title %}
 
 {% block content %}
+{% include "nav.html" %}
+
+<div class="m-5 flex justify-center items-center">
 
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
 
     <div>
     {% for field in form %}
-    <label>{{field.label}}</label><br>
-    {% render_field field class="" placeholder=field.label %}<br>
+    <label class="font-bold">{{field.label}}</label><br>
+    {% render_field field class="border rounded p-2 mb-2" placeholder=field.label %}<br>
     {% endfor %}
     </div>
 
-    <button type="submit">Register</button>
+    <button type="submit" class="bg-green-600 text-white rounded p-2">Register</button>
     
 </form>
-
+</div>
 {% endblock content %}

@@ -3,11 +3,16 @@
 {% block title %}Employees{% endblock title %}
 
 {% block content %}
-<h1>Employees</h1>
-    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); ">
+
+{% include "nav.html" %}
+
+<div class="m-5">
+
+<h1 class="text-2xl font-bold mb-3">Employees</h1>
+    <div class="grid grid-cols-3">
 
         {% for employee in employees %}
-        <div>
+        <div class="bg-black text-white rounded-2xl p-3 m-3">
         <!--<img src="{{employee.passport.url}}">  -->
         <p>Full Names: {{employee.first_name}} {{ employee.last_name }}</p>
         <p>Phone Number: {{employee.phone_number}}</p>
@@ -17,11 +22,19 @@
     
     </div>
 
-    <a href="{% url "management:register_employee" %}" style="display: flex;">
-        <div>
-            +
-        </div>
-        New Employee
-    </a>
+    <div class="[&>a]:rounded m-3 [&>a]:p-2 [&>a]:bg-gray-400 [&>a]:m-2">
+    {% if page_obj.has_previous %}
+    <a href="?page={{page_obj.previous_page_number}}">Previous</a>
+    {% endif %}
+    
+    {% if page_obj.has_next %}
+    <a href="?page={{page_obj.next_page_number}}">Next</a>
+    {% endif %}
+    </div>
+    <p class="text-center opacity-50">Page {{page_obj.number}} out of {{page_obj.paginator.num_pages}}</p>
 
+    <a href="{% url "management:register_employee" %}" class="bg-blue-800 text-white p-2 rounded">New Employee</a>
+
+</div>
+    
 {% endblock content %}

@@ -11,5 +11,4 @@ urlpatterns = [
     path('employees/<int:pk>/', views.EmployeeDetails.as_view()),
     path('daily-activities/', views.DailyActivitiesList.as_view()),
     path('daily-activities/<int:pk>/', views.ActivityDetail.as_view()),
-
 ]

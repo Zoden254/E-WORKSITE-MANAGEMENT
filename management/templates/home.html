@@ -2,15 +2,17 @@
 {% block title %}Home{% endblock title %}
 
 {% block content %}
-<h1>Home</h1>
+{% include "nav.html" %}
+
+<div class="m-10 bg-red">
 
 
-<a href="{% url "management:employees" %}">
-    <p>Employees</p>
+<a href="{% url "management:employees" %}" class="bg-blue-900 m-3 text-2xl p-10  text-white rounded-3xl">
+    Employees
 </a>
-
-
-<a href="{% url "activity_log:departments" %}">
-    <p>Today Activies</p>
+ 
+<a href="{% url "activity_log:departments" %}" class="bg-green-900 text-2xl p-10 text-white rounded-3xl">
+    Today Activies
 </a>
+</div>
 {% endblock content %}

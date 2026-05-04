@@ -1,11 +1,16 @@
 {% extends "master.html" %}
 
+
 {% block title %}Departments{% endblock title %}
 
+
+
 {% block content %}
+{% include "nav.html" %}
 
+<div class="m-10 grid grid-cols-3 [&>a]:hover:shadow-lg">
     {% for department in departments %}
-    <a href="{% url "activity_log:today_activities" department %}">{{department}}</a>
+    <a href="{% url "activity_log:today_activities" department %}" class="m-4 bg-black text-white p-5 rounded-2xl text-center">{{department}}</a>
     {% endfor %}
-
+</div>
 {% endblock content %}

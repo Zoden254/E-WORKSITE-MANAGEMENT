@@ -1,19 +1,29 @@
 {% extends "master.html" %}
+{% load widget_tweaks %}
 {% load humanize %}
 {% block title %}Activiy Log{% endblock title %}
 
 {% block content %}
-<h1>{% now "DATE_FORMAT" %}</h1>
+
+{% include "nav.html" %}
+<div class="m-5">
+
+<h1 class="text-2xl font-bold">{{selected_day}}</h1>
+
+<div class="m-4">
+    <a href="{% url "activity_log:pick-date" dep_name %}" class="rounded p-2 bg-gray-100">View Past Days</a>
+    
+</div>
 
 {% if messages %}
     {% for message in messages %}
-        <p>{{ message }}</p>
+        <p class="bg-green-300 rounded p-3 text-center text-green-700">{{ message }}</p>
     {% endfor %}
 {% endif %}
 
 <div>
-    <table>
-        <tr>
+    <table class="w-full">
+        <tr class="[&>th]:">
             <th>Employee</th>
             <th>Job title</th>
             <th>Payment basis</th>
@@ -24,23 +34,23 @@
 
         </tr>
         {% for employee in activities %}
-        <tr>
+        <tr class=" [&>td]:border [&>td]:rounded">
             <td>{{employee.employee}}</td>
             <td>{{ employee.employee.position }}</td>
             <td>{{ employee.employee.position.payment_basis }}</td>
             <td>{{ employee.employee.position.payment_amount|intcomma }}</td>
-            <td>
+            <td class="flex-col justify-center items-center">
                 <form method="POST" action="{% url "activity_log:update_hotel_bill" employee.id %}">
                     {% csrf_token %}
-                    <input type="text" value="{{employee.hotel_bill|intcomma}}" name="hotel_bill">
-                    <button type="submit">Update</button>
+                    <input type="text" value="{{employee.hotel_bill|intcomma}}" name="hotel_bill" class="border"><br>
+                    <button type="submit" class="bg-black text-white p-2 rounded">Update</button>
                 </form>
             </td>
-            <td>
+            <td class="flex-col justify-center items-center">
                 <form method="POST" action="{% url "activity_log:update_obligation" employee.id %}">
                     {% csrf_token %}
-                    <textarea type="text" name="obligation">{{employee.obligation}}</textarea>
-                    <button type="submit" >Update</button>
+                    <textarea type="text" name="obligation" class="border">{{employee.obligation}}</textarea><br>
+                    <button type="submit" class="bg-black text-white p-2 rounded">Update</button>
                 </form>
             </td>
             <td>{{ employee.balance }}</td>
@@ -48,16 +58,36 @@
 
         {% endfor %}
     </table>
+    <div class="[&>a]:p-2 [&>a]:rounded m-4 [&>a]:hover:shadow-lg [&>a]:bg-gray-400">
+        {% if activities.has_previous %}
+        <a href="?page={{activities.previous_page_number}}">Previous</a>
+        {% endif %}
+
+        {% if activities.has_next %}
+        <a href="?page={{activities.next_page_number}}">Next</a>
+        <a href="?page={{activities.paginator.num_pages}}">Last</a>
+        <a href="?page=1">Back to first</a>        
+        {% endif %}
+        <p class="opacity-50 text-center">Page {{activities.number}} out of {{activities.paginator.num_pages}}</p>
+    </div>
 </div>
 
+
+{% if form %}
 <div>
-    <h2>Add Employee</h2>
-    <form method="POST">
+    <h2 class="text-2xl font-bold ">Add Employee</h2>
+    <form method="POST" class="m-3">
         {% csrf_token %}
-        {{form}}
-        <button type="submit">Add</button>
+        
+        {% for field in form %}
+        {{field.label}}: {{field|add_class:"border rounded p-2 m-2"}}
+        
+        {% endfor %}<br><br>
+        <button type="submit" class="bg-green-500 text-white p-2 rounded">Add</button>
     </form>
 
 </div>
+{% endif %}
 
+</div>
 {% endblock content %}

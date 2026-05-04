@@ -1,0 +1,30 @@
+{% extends "master.html" %}
+
+{% block nav %}
+<div class="bg-black p-4 text-white w-full mb-30 fixed top-0">
+
+    <a class="text-2xl text-white font-bold">Site Management</a>
+    
+    {% if not user.is_authenticated %}
+        <ul class="float-end mx-5">
+            <a href="{% url "management:login" %}" class="bg-white text-black p-2 rounded">Login</a>
+            
+        </ul>
+    {% else %}
+        <ul class="float-end mx-5">
+            <a href="{% url "management:logout" %}" class="bg-blue-950 text-white p-2 rounded">Logout</a>
+            
+        </ul>
+    {% endif %}
+    
+    <ul class="flex gap-4 float-end">
+        <a href="{% url "management:home" %}"><li>Home</li></a>
+        <a href="{% url "activity_log:departments" %}"><li>Activities</li></a>
+        <a href="#"><li>Manage</li></a>
+
+    </ul>
+
+    
+    
+</div>
+{% endblock nav %}

@@ -1,0 +1,13 @@
+{% extends "master.html" %}
+
+{% block title %}Pick Day{% endblock title %}
+
+{% block content %}
+{% include "nav.html" %}
+
+<div class="m-5 grid grid-cols-3 gap-3">
+{% for date in dates %}
+<a href="{% url "activity_log:past-activities" dep date %}" class="bg-white rounded-2xl p-3 m-3 text-center">{{date}}</a>
+{% endfor %}
+</div>
+{% endblock content %}

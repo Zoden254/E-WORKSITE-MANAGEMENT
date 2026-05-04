@@ -20,6 +20,7 @@ class PositionsList(generics.ListAPIView):
 class EmployeesList(generics.ListCreateAPIView):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
+    
 
 class EmployeeDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = Employee.objects.all()
