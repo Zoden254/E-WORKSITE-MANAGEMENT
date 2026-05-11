@@ -13,7 +13,8 @@ class DailyActivitie(models.Model):
     present = models.BooleanField(default=False)
     attendance_fraction = models.CharField(max_length=10, blank=True)
     balance = models.DecimalField(max_digits=10, decimal_places=2, default=0, editable=False)
-
+    posted = models.BooleanField(default=False)
+    
     def save(self, *args, **kwargs):
         salary = self.employee.position.payment_amount
         hotel_bill = self.hotel_bill or 0

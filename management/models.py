@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, AbstractBaseUser
 from datetime import datetime
 from django.db.models import Q
+from django.utils import timezone
 # Create your models here.
 
 class User(AbstractUser):
@@ -22,6 +23,7 @@ class User(AbstractUser):
     position = models.CharField(choices=positions, max_length=50, default='Others')
     ID_number = models.CharField(unique=True, max_length=12)
     phone_no = models.CharField(max_length=13, unique=True)
+    accumulated_salary = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     date_registered = models.DateTimeField(default=datetime.now)
 
     def __str__(self):
@@ -60,7 +62,7 @@ class Employee(models.Model):
     phone_number = models.CharField(max_length=13)
     passport = models.ImageField(default='blank_passport.webp', blank=True)
     position =models.ForeignKey(Position, on_delete=models.CASCADE, related_name='employees')
-    date_employed = models.DateTimeField(default=datetime.now)
+    date_employed = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'

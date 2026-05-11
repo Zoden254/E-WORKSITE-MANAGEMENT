@@ -24,11 +24,11 @@
 
     <div class="[&>a]:rounded m-3 [&>a]:p-2 [&>a]:bg-gray-400 [&>a]:m-2">
     {% if page_obj.has_previous %}
-    <a href="?page={{page_obj.previous_page_number}}">Previous</a>
+    <a href="?page={{page_obj.previous_page_number}}">&#171; Previous</a>
     {% endif %}
     
     {% if page_obj.has_next %}
-    <a href="?page={{page_obj.next_page_number}}">Next</a>
+    <a href="?page={{page_obj.next_page_number}}">Next &#187;</a>
     {% endif %}
     </div>
     <p class="text-center opacity-50">Page {{page_obj.number}} out of {{page_obj.paginator.num_pages}}</p>
